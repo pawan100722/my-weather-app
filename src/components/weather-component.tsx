@@ -21,7 +21,9 @@ const currentDate = new Date();
 export const WeatherComponent = () => {
   const [coordinates, setCoordinates] = useState({ latitude: 0, longitude: 0 });
   const [weatherData, setWeatherData] = useState<{
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     current: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     location: any;
   }>({ current: {}, location: {} });
   const [isDay, setIsDay] = useState<boolean>(false)

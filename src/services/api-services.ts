@@ -5,7 +5,7 @@ export const getWeatherInfo=async (params:{location: string})=>{
   const {location} = params;
   // eslint-disable-next-line no-useless-catch
   try{
-     const url = `${CONSTANT.BASE_URL}/current.json`;
+     const url = `${CONSTANT.BASE_URL}/forecast.json`;
      const response = await axios.get(url, {
        params: { q: location,key: CONSTANT.API_KEY },
      });
