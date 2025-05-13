@@ -71,7 +71,7 @@
 .date-container{
   display: flex;
   flex-wrap: wrap;
-  width: 35%;
+  width: 55%;
   justify-self: flex-start;
 }
 
@@ -145,4 +145,18 @@
 
 .wind-icon, .cloud-icon{
   width: 2rem;
+}
+
+.date-inner-container{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.other-details-main-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }

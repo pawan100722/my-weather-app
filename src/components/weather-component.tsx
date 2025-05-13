@@ -16,6 +16,8 @@ import windIconNight from '../icons/wind-icon-night.svg';
 import cloudIconDay from '../icons/cloud-icon-day.svg';
 import cloudIconNight from '../icons/cloud-icon-night.svg';
 
+const currentDate = new Date();
+
 export const WeatherComponent = () => {
   const [coordinates, setCoordinates] = useState({ latitude: 0, longitude: 0 });
   const [weatherData, setWeatherData] = useState<{
@@ -24,11 +26,16 @@ export const WeatherComponent = () => {
   }>({ current: {}, location: {} });
   const [isDay, setIsDay] = useState<boolean>(false)
 
-  const [todaysDate] = useState<string[]>(new Date().toString().split(' ').slice(0,4))
+  const [todaysDate] = useState<string[]>(currentDate.toString().split(' ').slice(0,4));
+  const [time,setTime] =useState<string>(currentDate.toString().split(' ')[4])
 
   useEffect(() => {
     setCurrentLocation();
+    setInterval(()=>{
+      setTime(new Date().toString().split(' ')[4])
+    },1000)
   }, []);
+
 
   useEffect(() => {
     if (coordinates?.latitude) {
@@ -78,7 +85,11 @@ export const WeatherComponent = () => {
             alt="Weather Icon"
             className="icon"
           />
-          <img src={isDay?weatherIcon:weatherIconNight} className="weather-icon" alt="Weather-Icon" />
+          <img
+            src={isDay ? weatherIcon : weatherIconNight}
+            className="weather-icon"
+            alt="Weather-Icon"
+          />
           <p className="weather-clearance">
             {weatherData?.current?.condition?.text}
           </p>
@@ -92,15 +103,24 @@ export const WeatherComponent = () => {
       </div>
       <div className="mid-section">
         <div className="date-container">
-          <img src={isDay?dateIcon:dateIconNight} alt="Date Icon" className="date-icon" />
-          <h1 className="date">
-            {todaysDate[0]},&nbsp;{todaysDate[1]}&nbsp;{todaysDate[2]}&nbsp;
-            {todaysDate[3]}
-          </h1>
+          <div className="date-container">
+            <div className="date-inner-container">
+              <img
+                src={isDay ? dateIcon : dateIconNight}
+                alt="Date Icon"
+                className="date-icon"
+              />
+              <h1 className="date">
+                {todaysDate[0]},&nbsp;{todaysDate[2]}&nbsp;{todaysDate[1]}&nbsp;
+                {todaysDate[3]}
+              </h1>
+            </div>
+            <h2 className="time">{time}</h2>
+          </div>
         </div>
         <div className="location-container">
           <img
-            src={isDay?locationIcon:locationIconNight}
+            src={isDay ? locationIcon : locationIconNight}
             alt="Location Icon"
             className="location-icon"
           />
@@ -108,30 +128,36 @@ export const WeatherComponent = () => {
           <h2 className="location-region">{weatherData?.location?.region}</h2>
         </div>
       </div>
-      <div className="humidity-container">
-        <img
-          src={isDay ? humidityIconDay : humidityIconNight}
-          alt="Humidity Icon"
-          className="humidity-icon"
-        />
-        <h3 className="humidity">
-          Humidity is {weatherData?.current?.humidity}
-        </h3>
-        &nbsp;
-      </div>
-
-      <div className="other-details-container">
-        <div className="wind-container">
+      <div className="other-details-main-container">
+        <div className="humidity-container">
           <img
-            src={isDay ? windIconDay : windIconNight}
-            alt="Wind Icon"
-            className="wind-icon"
+            src={isDay ? humidityIconDay : humidityIconNight}
+            alt="Humidity Icon"
+            className="humidity-icon"
           />
-          <p className="wind">Wind {weatherData?.current?.wind_kph} km/h</p>
+          <h3 className="humidity">
+            Humidity is {weatherData?.current?.humidity}
+          </h3>
+          &nbsp;
         </div>
-        <div className="cloud-container">
-          <img src={isDay?cloudIconDay:cloudIconNight} alt="Cloud Icon" className="cloud-icon" />
-        <p className="cloud">Cloud {weatherData?.current?.cloud}</p>
+
+        <div className="other-details-container">
+          <div className="wind-container">
+            <img
+              src={isDay ? windIconDay : windIconNight}
+              alt="Wind Icon"
+              className="wind-icon"
+            />
+            <p className="wind">Wind {weatherData?.current?.wind_kph} km/h</p>
+          </div>
+          <div className="cloud-container">
+            <img
+              src={isDay ? cloudIconDay : cloudIconNight}
+              alt="Cloud Icon"
+              className="cloud-icon"
+            />
+            <p className="cloud">Cloud {weatherData?.current?.cloud}</p>
+          </div>
         </div>
       </div>
     </div>
