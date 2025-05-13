@@ -1,9 +1,20 @@
 import { useEffect, useState } from "react";
 import '../styles/weather-component.css'
 import { getWeatherInfo } from "../services/api-services.ts";
+import sunIcon from '../icons/sun.svg';
+import moonIcon from '../icons/moon-icon.svg';
 import dateIcon from '../icons/date-icon.svg';
+import dateIconNight from '../icons/date-icon-night.svg';
 import weatherIcon from '../icons/weather-icon.svg';
+import weatherIconNight from '../icons/weather-icon-night.svg';
 import locationIcon from '../icons/location-icon.svg';
+import locationIconNight from '../icons/location-icon-night.svg';
+import humidityIconDay from '../icons/humidity-icon-day.svg';
+import humidityIconNight from '../icons/humidity-icon-night.svg';
+import windIconDay from '../icons/wind-icon-day.svg';
+import windIconNight from '../icons/wind-icon-night.svg';
+import cloudIconDay from '../icons/cloud-icon-day.svg';
+import cloudIconNight from '../icons/cloud-icon-night.svg';
 
 export const WeatherComponent = () => {
   const [coordinates, setCoordinates] = useState({ latitude: 0, longitude: 0 });
@@ -44,7 +55,7 @@ export const WeatherComponent = () => {
         location: `${coordinates.latitude},${coordinates.longitude}`,
       });
       setWeatherData(data);
-      if(data?.current?.isDay){
+      if(data?.current?.is_day===1){
         setIsDay(true)
       }else{
         setIsDay(false)
@@ -59,15 +70,15 @@ export const WeatherComponent = () => {
   };
 
   return (
-    <div className={`weather-component-container ${isDay?'day':'night'}`}>
+    <div className={`weather-component-container ${isDay ? "day" : "night"}`}>
       <div className="weather-header-container">
         <div className="weather-header-section-1">
           <img
-            src={weatherData?.current?.condition?.icon}
+            src={isDay ? sunIcon : moonIcon}
             alt="Weather Icon"
             className="icon"
           />
-          <img src={weatherIcon} className="weather-icon" alt="Weather-Icon" />
+          <img src={isDay?weatherIcon:weatherIconNight} className="weather-icon" alt="Weather-Icon" />
           <p className="weather-clearance">
             {weatherData?.current?.condition?.text}
           </p>
@@ -81,7 +92,7 @@ export const WeatherComponent = () => {
       </div>
       <div className="mid-section">
         <div className="date-container">
-          <img src={dateIcon} alt="Date Icon" className="date-icon" />
+          <img src={isDay?dateIcon:dateIconNight} alt="Date Icon" className="date-icon" />
           <h1 className="date">
             {todaysDate[0]},&nbsp;{todaysDate[1]}&nbsp;{todaysDate[2]}&nbsp;
             {todaysDate[3]}
@@ -89,7 +100,7 @@ export const WeatherComponent = () => {
         </div>
         <div className="location-container">
           <img
-            src={locationIcon}
+            src={isDay?locationIcon:locationIconNight}
             alt="Location Icon"
             className="location-icon"
           />
@@ -98,6 +109,11 @@ export const WeatherComponent = () => {
         </div>
       </div>
       <div className="humidity-container">
+        <img
+          src={isDay ? humidityIconDay : humidityIconNight}
+          alt="Humidity Icon"
+          className="humidity-icon"
+        />
         <h3 className="humidity">
           Humidity is {weatherData?.current?.humidity}
         </h3>
@@ -105,8 +121,18 @@ export const WeatherComponent = () => {
       </div>
 
       <div className="other-details-container">
-        <p className="wind">Wind {weatherData?.current?.wind_kph} km/h</p>
+        <div className="wind-container">
+          <img
+            src={isDay ? windIconDay : windIconNight}
+            alt="Wind Icon"
+            className="wind-icon"
+          />
+          <p className="wind">Wind {weatherData?.current?.wind_kph} km/h</p>
+        </div>
+        <div className="cloud-container">
+          <img src={isDay?cloudIconDay:cloudIconNight} alt="Cloud Icon" className="cloud-icon" />
         <p className="cloud">Cloud {weatherData?.current?.cloud}</p>
+        </div>
       </div>
     </div>
   );

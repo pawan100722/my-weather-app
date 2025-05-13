@@ -24,7 +24,6 @@
 .night::before{
   position: absolute;
   z-index: -999;
-  opacity: 0.9;
   content:'';
   height:100%;
   width: 100%;
@@ -109,12 +108,17 @@
 
 .humidity-container{
   display: flex;
+  gap:10px;
   justify-content: center;
   margin:50px;
   width: 20%;
   padding: 10px;
   border-radius: 20px;
   background-color: rgb(103, 92, 92,0.4);
+}
+
+.humidity-icon{
+  width: 1.5rem;
 }
 
 .humidity{
@@ -135,4 +139,14 @@
 .other-details-container p{
   font-size: 1.5rem;
   margin: 10px;
+}
+
+.wind-container, .cloud-container {
+  display: flex;
+  gap: 5px;
+  padding: 10px;
+}
+
+.wind-icon, .cloud-icon{
+  width: 2rem;
 }
