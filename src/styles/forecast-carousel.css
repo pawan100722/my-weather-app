@@ -1,0 +1,81 @@
+.forecast-main-container{
+  background-color: rgb(152, 108, 108,0.3);
+  border-radius: 20px;
+  padding:10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.forecast-carousel-main-container{
+  width:704px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:10px;
+  padding:10px;
+  margin:5px 0 10px 0;
+}
+
+.forecast-title{
+  font-size: x-large;
+}
+
+.forecast-night{
+  color: white;
+  background-image: url('../images//forecast-card-night.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.forecast-day{
+  color:black;
+  background-image: url('../images//forecast-card-day.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
+.carousel-prev, .carousel-next{
+  flex-shrink: 0;
+  width:10%;
+}
+
+.forecast-carousel-container{
+  display:flex;
+  overflow:hidden;
+}
+
+.forecast-card{
+  width: 200px;
+  height: 200px;
+  padding: 10px;
+  border: 1px solid black;
+  flex-shrink: 0;
+  transform: scale(1);
+  transition: transform 1s linear;
+}
+
+
+.carousel-icon{
+  width: 2rem;
+  cursor:pointer;
+}
+
+.carousel-icon:active{
+  opacity: 0.5;
+}
+
+.forecast-time{
+  font-size: 1.3rem;
+}
+
+.forecast-humidity,.forecast-text,.forecast-wind{
+  font-weight: bold;
+}
+
+.forecast-temperature{
+  font-size: 1.5rem;
+  font-weight: bolder;
+}

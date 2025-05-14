@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
-import '../styles/weather-component.css'
+import { toast } from "react-toastify";
+
+import '../styles/weather-component.css';
+
 import { getWeatherInfo } from "../services/api-services.ts";
 import sunIcon from '../icons/sun.svg';
 import moonIcon from '../icons/moon-icon.svg';
 import dateIcon from '../icons/date-icon.svg';
+import locationIcon from '../icons/location-icon.svg';
 import dateIconNight from '../icons/date-icon-night.svg';
 import weatherIcon from '../icons/weather-icon.svg';
 import weatherIconNight from '../icons/weather-icon-night.svg';
-import locationIcon from '../icons/location-icon.svg';
+import { ForecastDTO } from "../dtos/data-dto.ts";
 import locationIconNight from '../icons/location-icon-night.svg';
 import humidityIconDay from '../icons/humidity-icon-day.svg';
 import humidityIconNight from '../icons/humidity-icon-night.svg';
@@ -15,21 +19,40 @@ import windIconDay from '../icons/wind-icon-day.svg';
 import windIconNight from '../icons/wind-icon-night.svg';
 import cloudIconDay from '../icons/cloud-icon-day.svg';
 import cloudIconNight from '../icons/cloud-icon-night.svg';
+import { ForecastCarousel } from "./forecast-carousel.tsx";
 
 const currentDate = new Date();
 
 export const WeatherComponent = () => {
+  const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
   const [coordinates, setCoordinates] = useState({ latitude: 0, longitude: 0 });
   const [weatherData, setWeatherData] = useState<{
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     current: any;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     location: any;
-  }>({ current: {}, location: {} });
-  const [isDay, setIsDay] = useState<boolean>(false)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    forecast:any;
+  }>({ current: {}, location: {}, forecast:{} });
+  const [weatherForecastData, setWeatherForecastData] = useState<ForecastDTO[]>(
+    [
+      {
+        condition: { icon: '', text: '' },
+        is_day: NaN,
+        time: '',
+        temp_c: NaN,
+        wind_kph: NaN,
+        humidity: NaN,
+      },
+    ]
+  );
 
   const [todaysDate] = useState<string[]>(currentDate.toString().split(' ').slice(0,4));
-  const [time,setTime] =useState<string>(currentDate.toString().split(' ')[4])
+  const [time,setTime] =useState<string>(currentDate.toString().split(' ')[4]);
+  /**
+   * When the component mounts, the the current location is set
+   */
+  
 
   useEffect(() => {
     setCurrentLocation();
@@ -41,10 +64,14 @@ export const WeatherComponent = () => {
 
   useEffect(() => {
     if (coordinates?.latitude) {
-      fetchLocationData();
+      fetchWeatherData();
     }
   }, [coordinates]);
 
+
+  /**
+   * It sets the coordinates for current location
+   */
   const setCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -53,22 +80,25 @@ export const WeatherComponent = () => {
         setCoordinates({ latitude, longitude });
       },
       (error) => {
-        console.error("Error getting location:", error);
+        toast.error(`Error getting location:${error?.message}`);
+        // alert(`Error getting location:${error?.message}`);
+        // console.error("Error getting location:", error?.code,error.message);
       }
     );
   };
 
-  const fetchLocationData = async () => {
+
+  /**
+   * fetches Weather data from API response and sets the states
+   */
+  const fetchWeatherData = async () => {
     try {
       const data = await getWeatherInfo({
         location: `${coordinates.latitude},${coordinates.longitude}`,
       });
       setWeatherData(data);
-      if(data?.current?.is_day===1){
-        setIsDay(true)
-      }else{
-        setIsDay(false)
-      }
+      setWeatherForecastData(data?.forecast?.forecastday[0]?.hour);
+      setIsDataLoaded(true);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       const { name, status } = err;
@@ -78,17 +108,25 @@ export const WeatherComponent = () => {
     }
   };
 
-  return (
-    <div className={`weather-component-container ${isDay ? "day" : "night"}`}>
-      <div className="weather-header-container">
-        <div className="weather-header-section-1">
+  
+
+  return !isDataLoaded ? (
+    <h1>Data is loading</h1>
+  ) : (
+    <div
+      className={`weather-component-container ${
+        weatherData?.current?.is_day ? "day" : "night"
+      }`}
+    >
+      <div className="weather-top-section-container">
+        <div className="weather-top-section-1">
           <img
-            src={isDay ? sunIcon : moonIcon}
+            src={weatherData?.current?.is_day ? sunIcon : moonIcon}
             alt="Weather Icon"
             className="icon"
           />
           <img
-            src={isDay ? weatherIcon : weatherIconNight}
+            src={weatherData?.current?.is_day ? weatherIcon : weatherIconNight}
             className="weather-icon"
             alt="Weather-Icon"
           />
@@ -103,26 +141,26 @@ export const WeatherComponent = () => {
           </h3>
         </div>
       </div>
-      <div className="mid-section">
+      <div className="mid-section-container">
         <div className="date-container">
-          <div className="date-container">
-            <div className="date-inner-container">
-              <img
-                src={isDay ? dateIcon : dateIconNight}
-                alt="Date Icon"
-                className="date-icon"
-              />
-              <h1 className="date">
-                {todaysDate[0]},&nbsp;{todaysDate[2]}&nbsp;{todaysDate[1]}&nbsp;
-                {todaysDate[3]}
-              </h1>
-            </div>
-            <h2 className="time">{time}</h2>
+          <div className="date-inner-container">
+            <img
+              src={weatherData?.current?.is_day ? dateIcon : dateIconNight}
+              alt="Date Icon"
+              className="date-icon"
+            />
+            <h1 className="date">
+              {todaysDate[0]},&nbsp;{todaysDate[2]}&nbsp;{todaysDate[1]}&nbsp;
+              {todaysDate[3]}
+            </h1>
           </div>
+          <h2 className="time">{time}</h2>
         </div>
         <div className="location-container">
           <img
-            src={isDay ? locationIcon : locationIconNight}
+            src={
+              weatherData?.current?.is_day ? locationIcon : locationIconNight
+            }
             alt="Location Icon"
             className="location-icon"
           />
@@ -133,7 +171,9 @@ export const WeatherComponent = () => {
       <div className="other-details-main-container">
         <div className="humidity-container">
           <img
-            src={isDay ? humidityIconDay : humidityIconNight}
+            src={
+              weatherData?.current?.is_day ? humidityIconDay : humidityIconNight
+            }
             alt="Humidity Icon"
             className="humidity-icon"
           />
@@ -146,7 +186,7 @@ export const WeatherComponent = () => {
         <div className="other-details-container">
           <div className="wind-container">
             <img
-              src={isDay ? windIconDay : windIconNight}
+              src={weatherData?.current?.is_day ? windIconDay : windIconNight}
               alt="Wind Icon"
               className="wind-icon"
             />
@@ -154,7 +194,7 @@ export const WeatherComponent = () => {
           </div>
           <div className="cloud-container">
             <img
-              src={isDay ? cloudIconDay : cloudIconNight}
+              src={weatherData?.current?.is_day ? cloudIconDay : cloudIconNight}
               alt="Cloud Icon"
               className="cloud-icon"
             />
@@ -162,6 +202,7 @@ export const WeatherComponent = () => {
           </div>
         </div>
       </div>
+      <ForecastCarousel weatherForecastData={weatherForecastData} isDay={weatherData?.current?.is_day}/>
     </div>
   );
 };
