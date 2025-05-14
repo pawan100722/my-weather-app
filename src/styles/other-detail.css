@@ -1,0 +1,55 @@
+.humidity-container{
+  display: flex;
+  flex-wrap: wrap;
+  gap:10px;
+  justify-content: center;
+  margin:50px;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: rgb(103, 92, 92,0.4);
+}
+
+.humidity-icon{
+  width: 1.5rem;
+}
+
+.humidity{
+  font-size: 1.5rem;
+}
+
+.temperature-container{
+  background-color: rgb(174, 191, 191,0.2);
+  padding:10px;
+  border-radius: 20px;
+}
+
+.other-details-container{
+  background-color: rgb(150, 121, 177,0.5);
+  border-radius: 20px;
+  margin: 10px;
+}
+
+.other-details-container p{
+  font-size: 1.5rem;
+  margin: 10px;
+}
+
+.wind-container, .cloud-container {
+  display: flex;
+  gap: 5px;
+  padding: 10px;
+}
+
+.wind-icon, .cloud-icon{
+  width: 2rem;
+}
+
+
+
+.other-details-main-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+

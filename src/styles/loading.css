@@ -1,0 +1,26 @@
+.loading-container{
+  width: 50%;
+  height:100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:20px;
+}
+
+.loader{
+  height:10px;
+  width:10px;
+  border-radius:50%;
+  border:1px solid black;
+  animation: move-horizontal 2s ease  infinite ;
+}
+
+@keyframes move-horizontal {
+  0%{
+    transform: translateX(0%);
+  }
+
+  100%{
+    transform: translateX(500px);
+  }
+}
