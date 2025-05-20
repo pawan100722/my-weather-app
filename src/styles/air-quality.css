@@ -1,0 +1,49 @@
+.air-quality-container{
+  position: relative;
+  padding: 10px;
+  border-radius: 20px;
+  height: 50px;
+  width: 200px;
+  cursor: pointer;
+  font-weight: bolder;
+  font-size: 1.5rem;
+}
+
+.air-quality-container-day{
+  background-color: rgb(103, 92, 92,0.4);
+  color:black;
+}
+
+.air-quality-container-night{
+  background-color: rgb(103, 92, 92,0.4);
+  color:white;
+}
+
+.air-quality-data{
+  font-weight: bold;
+  font-size: 1rem;
+  color:white;
+  position: absolute;
+  top:40px;
+  border-radius: 20px;
+  z-index: 999;
+  width: 340px;
+  padding:10px;
+  opacity:0;
+  background-color: rgb(103, 92, 92);
+  transition: opacity 1s ease;
+}
+
+.air-quality-data>p{
+  padding:5px;
+}
+
+.air-quality-data p span{
+  font-size: 1.3rem;
+  color:aquamarine;
+  margin:10px;
+}
+
+.air-quality-container:hover> .air-quality-data{
+  opacity: 1;
+}

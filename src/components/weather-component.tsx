@@ -9,6 +9,7 @@ import { WeatherMidSectionComponent } from "./weather-midsection.tsx";
 import { OtherDetailsComponent } from "./other-details.tsx";
 import { TopSection } from "./top-section.tsx";
 import { Loading } from "./loading.tsx";
+import { AirQuality } from "./air-quality.tsx";
 
 
 export const WeatherComponent = () => {
@@ -112,6 +113,10 @@ export const WeatherComponent = () => {
           isDay={weatherData?.current?.is_day}
           locationName={weatherData?.location?.name}
           regionName={weatherData?.location?.region}
+        />
+        <AirQuality
+          isDay={weatherData?.current?.is_day}
+          data={weatherData?.current?.air_quality}
         />
         <OtherDetailsComponent
           isDay={weatherData?.current?.is_day}

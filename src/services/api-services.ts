@@ -7,7 +7,7 @@ export const getWeatherInfo=async (params:{location: string})=>{
   try{
      const url = `${CONSTANT.BASE_URL}/forecast.json`;
      const response = await axios.get(url, {
-       params: { q: location,key: CONSTANT.API_KEY },
+       params: { q: location,key: CONSTANT.API_KEY,aqi:'yes' },
      });
      return response?.data;
   }

@@ -24,11 +24,12 @@
 
 .info-container{
   width: 90dvw;
-  column-gap: 400px;
+  column-gap: 100px;
   row-gap: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 }
 
 

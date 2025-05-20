@@ -22,6 +22,12 @@
   z-index: 999;
 }
 
+.temperature-container{
+  background-color: rgb(174, 191, 191,0.2);
+  padding:10px;
+  border-radius: 20px;
+}
+
 .weather-icon{
   width: 3.5rem;
 }

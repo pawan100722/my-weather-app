@@ -6,7 +6,7 @@
   margin:50px;
   padding: 10px;
   border-radius: 20px;
-  background-color: rgb(103, 92, 92,0.4);
+  background-color: rgb(150, 121, 177,0.5);
 }
 
 .humidity-icon{
@@ -17,11 +17,7 @@
   font-size: 1.5rem;
 }
 
-.temperature-container{
-  background-color: rgb(174, 191, 191,0.2);
-  padding:10px;
-  border-radius: 20px;
-}
+
 
 .other-details-container{
   background-color: rgb(150, 121, 177,0.5);
