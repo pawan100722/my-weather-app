@@ -3,8 +3,6 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  /* width: 80%; */
-  /* padding: 20px; */
 }
 
 
@@ -15,7 +13,7 @@
   justify-content: center;
   gap:10px;
   background-color: hsla(33, 93%, 63%, 0.3);
-  /* padding: 5px; */
+  padding: 5px;
   border-radius: 20px;
 }
 
@@ -24,7 +22,7 @@
 }
 
 .location-city{
-  font-size: 4rem;
+  font-size: 4.5rem;
 }
 
 .location-region{

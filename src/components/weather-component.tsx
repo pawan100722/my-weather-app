@@ -107,17 +107,19 @@ export const WeatherComponent = () => {
         currentFeelsLike={weatherData?.current?.feelslike_c}
         currentTemperature={weatherData?.current?.temp_c}
       />
-      <WeatherMidSectionComponent
-        isDay={weatherData?.current?.is_day}
-        locationName={weatherData?.location?.name}
-        regionName={weatherData?.location?.region}
-      />
-      <OtherDetailsComponent
-        isDay={weatherData?.current?.is_day}
-        humidity={weatherData?.current?.humidity}
-        windKPH={weatherData?.current?.wind_kph}
-        cloud={weatherData?.current?.cloud}
-      />
+      <div className="info-container">
+        <WeatherMidSectionComponent
+          isDay={weatherData?.current?.is_day}
+          locationName={weatherData?.location?.name}
+          regionName={weatherData?.location?.region}
+        />
+        <OtherDetailsComponent
+          isDay={weatherData?.current?.is_day}
+          humidity={weatherData?.current?.humidity}
+          windKPH={weatherData?.current?.wind_kph}
+          cloud={weatherData?.current?.cloud}
+        />
+      </div>
       <ForecastCarousel
         weatherForecastData={weatherForecastData}
         isDay={weatherData?.current?.is_day}

@@ -23,10 +23,12 @@
 }
 
 .info-container{
-  width: 100dvw;
+  width: 90dvw;
+  column-gap: 400px;
+  row-gap: 20px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 
