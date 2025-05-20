@@ -22,5 +22,12 @@
   background-position: center;
 }
 
+.info-container{
+  width: 100dvw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
 
 

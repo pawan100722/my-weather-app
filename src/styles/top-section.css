@@ -34,4 +34,22 @@
   font-size: 4.5rem;
 }
 
+.date-container{
+  display: flex;
+  flex-wrap: wrap;
+  width: 55%;
+  justify-self: flex-start;
+}
+
+.date-inner-container{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.date-icon{
+  width: 2rem;
+}
+
 
