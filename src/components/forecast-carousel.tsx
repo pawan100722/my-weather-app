@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../styles/forecast-carousel.css";
 import { ForecastDTO } from "../dtos/data-dto";
 import { ForecastCarouselPropDTO } from "../dtos/components-dto";
@@ -7,27 +7,60 @@ import leftArrowIconNight from "../icons/arrow-left-circle-night-icon.svg";
 import rightArrowIconDay from "../icons/arrow-right-circle-day-icon.svg";
 import rightArrowIconNight from "../icons/arrow-right-circle-night-icon.svg";
 
-export const ForecastCarousel=({weatherForecastData,isDay}:ForecastCarouselPropDTO)=>{
+export const ForecastCarousel = ({
+  weatherForecastData,
+  isDay,
+}: ForecastCarouselPropDTO) => {
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const [autoNextId, setAutoNextId] = useState<number>(NaN);
+  const [hasUserClicked, setHasUserClicked] = useState<boolean>(false);
 
-    const[selectedIndex, setSelectedIndex] = useState<number>(0)
-  
+
+  /**
+   * used to auto move the carousel
+   */
+  useEffect(() => {
+    const id = setInterval(() => {
+      next();
+      setAutoNextId(id);
+    }, 2500);
+
+    return () => {
+       clearInterval(id);
+    };
+  },[]);
+
+   /**
+    * If user clicks the next or prev button the carousel
+    * Then this effect stops it from auto move
+    */
+   useEffect(()=>{
+    if(hasUserClicked){
+    console.log('Clearing interval,Auto next id:', autoNextId)
+    clearInterval(autoNextId);}
+   },[hasUserClicked])
 
   const handleCarouselNext = () => {
-    console.log("next");
-
-    setSelectedIndex((prev) =>
-      prev === weatherForecastData.length ? 0 : prev + 1
-    );
+    setHasUserClicked(true)
+    next();
   };
 
   const handleCarouselPrev = () => {
-    console.log("prev");
+    setHasUserClicked(true);
+    prev();
+  };
 
+  const next=()=>{
+    setSelectedIndex((prev) =>
+      prev === weatherForecastData.length ? 0 : prev + 1
+    );
+  }
+
+  const prev=()=>{
     setSelectedIndex((prev) =>
       prev === 0 ? weatherForecastData.length : prev - 1
     );
-  };
-
+  }
 
   return (
     <div className="forecast-main-container">
@@ -70,7 +103,6 @@ export const ForecastCarousel=({weatherForecastData,isDay}:ForecastCarouselPropD
           onClick={handleCarouselNext}
         />
       </div>
-      
     </div>
   );
-}
+};

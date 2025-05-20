@@ -8,7 +8,7 @@ import { MidSectionComponentPropDTO } from "../dtos/components-dto";
 
 const currentDate = new Date();
 
-export const WeatherMidSectionComponent = ({ weatherData }: MidSectionComponentPropDTO) => {
+export const WeatherMidSectionComponent = ({ isDay, locationName,regionName }: MidSectionComponentPropDTO) => {
 
   const [todaysDate] = useState<string[]>(
     currentDate.toString().split(" ").slice(0, 4)
@@ -28,7 +28,7 @@ export const WeatherMidSectionComponent = ({ weatherData }: MidSectionComponentP
       <div className="date-container">
         <div className="date-inner-container">
           <img
-            src={weatherData?.current?.is_day ? dateIcon : dateIconNight}
+            src={isDay ? dateIcon : dateIconNight}
             alt="Date Icon"
             className="date-icon"
           />
@@ -41,12 +41,12 @@ export const WeatherMidSectionComponent = ({ weatherData }: MidSectionComponentP
       </div>
       <div className="location-container">
         <img
-          src={weatherData?.current?.is_day ? locationIcon : locationIconNight}
+          src={isDay ? locationIcon : locationIconNight}
           alt="Location Icon"
           className="location-icon"
         />
-        <h1 className="location-city">{weatherData?.location?.name}</h1>
-        <h2 className="location-region">{weatherData?.location?.region}</h2>
+        <h1 className="location-city">{locationName}</h1>
+        <h2 className="location-region">{regionName}</h2>
       </div>
     </div>
   );

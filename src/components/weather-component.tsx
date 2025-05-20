@@ -94,17 +94,34 @@ export const WeatherComponent = () => {
   
 
   return !isDataLoaded ? (
-    <Loading/>
+    <Loading />
   ) : (
     <div
       className={`weather-component-container ${
         weatherData?.current?.is_day ? "day" : "night"
       }`}
     >
-      <TopSection weatherData={weatherData}/>
-      <WeatherMidSectionComponent weatherData={weatherData}/>
-      <OtherDetailsComponent weatherData={weatherData}/>
-      <ForecastCarousel weatherForecastData={weatherForecastData} isDay={weatherData?.current?.is_day}/>
+      <TopSection
+        isDay={weatherData?.current?.is_day}
+        currentConditionText={weatherData?.current?.condition?.tex}
+        currentFeelsLike={weatherData?.current?.feelslike_c}
+        currentTemperature={weatherData?.current?.temp_c}
+      />
+      <WeatherMidSectionComponent
+        isDay={weatherData?.current?.is_day}
+        locationName={weatherData?.location?.name}
+        regionName={weatherData?.location?.region}
+      />
+      <OtherDetailsComponent
+        isDay={weatherData?.current?.is_day}
+        humidity={weatherData?.current?.humidity}
+        windKPH={weatherData?.current?.wind_kph}
+        cloud={weatherData?.current?.cloud}
+      />
+      <ForecastCarousel
+        weatherForecastData={weatherForecastData}
+        isDay={weatherData?.current?.is_day}
+      />
     </div>
   );
 };

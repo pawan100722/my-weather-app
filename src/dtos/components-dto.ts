@@ -1,18 +1,26 @@
-import { ForecastDTO, WeatherDTO } from "./data-dto";
+import { ForecastDTO } from "./data-dto";
 
 export interface ForecastCarouselPropDTO {
   weatherForecastData:ForecastDTO[];
   isDay:boolean;
 }
 
-export interface MidSectionComponentPropDTO{
-  weatherData: WeatherDTO,
+export interface MidSectionComponentPropDTO {
+  isDay:number;
+  locationName:string;
+  regionName:string;
 }
 
-export interface OtherDetailsComponentPropDTO{
-  weatherData: WeatherDTO,
+export interface OtherDetailsComponentPropDTO {
+  isDay:number;
+  humidity:number;
+  windKPH:number;
+  cloud:number;
 }
 
-export interface TopSectionPropDTO{
-  weatherData: WeatherDTO,
+export interface TopSectionPropDTO {
+  isDay: number,
+  currentConditionText:string,
+  currentFeelsLike:number,
+  currentTemperature:number
 }

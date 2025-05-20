@@ -5,28 +5,28 @@ import weatherIcon from "../icons/weather-icon.svg";
 import weatherIconNight from "../icons/weather-icon-night.svg";
 import { TopSectionPropDTO } from '../dtos/components-dto';
 
-export const TopSection = ({ weatherData }:TopSectionPropDTO) => {
+export const TopSection = ({ isDay, currentConditionText, currentFeelsLike, currentTemperature}:TopSectionPropDTO) => {
   return (
     <div className="weather-top-section-container">
       <div className="weather-top-section-1">
         <img
-          src={weatherData?.current?.is_day ? sunIcon : moonIcon}
+          src={ isDay? sunIcon : moonIcon}
           alt="Weather Icon"
           className="icon"
         />
         <img
-          src={weatherData?.current?.is_day ? weatherIcon : weatherIconNight}
+          src={isDay ? weatherIcon : weatherIconNight}
           className="weather-icon"
           alt="Weather-Icon"
         />
         <p className="weather-clearance">
-          {weatherData?.current?.condition?.text}
+          {currentConditionText}
         </p>
       </div>
       <div className="temperature-container">
-        <h1 className="temperature">{weatherData?.current?.temp_c}&deg; C</h1>
+        <h1 className="temperature">{currentTemperature}&deg; C</h1>
         <h3 className="feels-like">
-          Feels Like {weatherData?.current?.feelslike_c}
+          Feels Like {currentFeelsLike}
         </h3>
       </div>
     </div>

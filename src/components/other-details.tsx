@@ -7,19 +7,19 @@ import cloudIconNight from "../icons/cloud-icon-night.svg";
 import { OtherDetailsComponentPropDTO } from "../dtos/components-dto";
 import '../styles/other-detail.css';
 
-export const OtherDetailsComponent = ({ weatherData }:OtherDetailsComponentPropDTO) => {
+export const OtherDetailsComponent = ({ isDay, humidity, windKPH, cloud }:OtherDetailsComponentPropDTO) => {
   return (
     <div className="other-details-main-container">
       <div className="humidity-container">
         <img
           src={
-            weatherData?.current?.is_day ? humidityIconDay : humidityIconNight
+            isDay ? humidityIconDay : humidityIconNight
           }
           alt="Humidity Icon"
           className="humidity-icon"
         />
         <h3 className="humidity">
-          Humidity is {weatherData?.current?.humidity}
+          Humidity is {humidity}
         </h3>
         &nbsp;
       </div>
@@ -27,19 +27,19 @@ export const OtherDetailsComponent = ({ weatherData }:OtherDetailsComponentPropD
       <div className="other-details-container">
         <div className="wind-container">
           <img
-            src={weatherData?.current?.is_day ? windIconDay : windIconNight}
+            src={isDay ? windIconDay : windIconNight}
             alt="Wind Icon"
             className="wind-icon"
           />
-          <p className="wind">Wind {weatherData?.current?.wind_kph} km/h</p>
+          <p className="wind">Wind {windKPH} km/h</p>
         </div>
         <div className="cloud-container">
           <img
-            src={weatherData?.current?.is_day ? cloudIconDay : cloudIconNight}
+            src={isDay ? cloudIconDay : cloudIconNight}
             alt="Cloud Icon"
             className="cloud-icon"
           />
-          <p className="cloud">Cloud {weatherData?.current?.cloud}</p>
+          <p className="cloud">Cloud {cloud}</p>
         </div>
       </div>
     </div>
