@@ -12,15 +12,12 @@
 
 .air-quality-heading{
   background-color: rgb(103, 92, 92,0.7);
-  padding:10px;
+  padding:8px;
   border-radius: 20px;
-  /* position: absolute;
-  top:-50px;
-  z-index: 11; */
 }
 
 .air-quality-container-day{
-  color:black;
+  color:rgb(77, 9, 91);
 }
 
 .air-quality-container-night{
@@ -37,14 +34,12 @@
   border-radius: 50%;
   width: 350px;
   height:350px;
-  opacity:0.1;
-  background-color: rgb(103, 92, 92,0.7);
-  transition: opacity 0.7s ease;
+  background-color: rgb(103, 92, 92,0.3);
 }
 
-.air-quality-data:hover, .air-quality-heading:hover~.air-quality-data{
+/* .air-quality-data:hover, .air-quality-heading:hover~.air-quality-data{
   opacity: 1;
-}
+} */
 
 
 .air-quality-data>p{

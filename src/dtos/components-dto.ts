@@ -38,3 +38,16 @@ export interface AirQualityPropsDTO {
     'gb-defra-index': number;
   };
 }
+
+export interface WindDetailsProps {
+  data: {
+    windKPH:number;
+    windDirection:number;
+    atmosphericPressure:number;
+    windChill:number;
+    heatIndex:number;
+    dewPoint:number;
+    visibility:number;
+    uv:number;
+  }, isDay:number;
+}

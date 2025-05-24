@@ -10,6 +10,7 @@ import { OtherDetailsComponent } from "./other-details.tsx";
 import { TopSection } from "./top-section.tsx";
 import { Loading } from "./loading.tsx";
 import { AirQuality } from "./air-quality.tsx";
+import { WindDetails } from "./wind-details.tsx";
 
 
 export const WeatherComponent = () => {
@@ -100,11 +101,7 @@ export const WeatherComponent = () => {
   return !isDataLoaded ? (
     <Loading />
   ) : (
-    <div
-      className={`weather-component-container ${
-        isDay ? "day" : "night"
-      }`}
-    >
+    <div className={`weather-component-container ${isDay ? "day" : "night"}`}>
       <TopSection
         isDay={isDay}
         currentConditionText={weatherData?.current?.condition?.text}
@@ -117,21 +114,33 @@ export const WeatherComponent = () => {
           locationName={weatherData?.location?.name}
           regionName={weatherData?.location?.region}
         />
-          <OtherDetailsComponent
-            isDay={isDay}
-            humidity={weatherData?.current?.humidity}
-            windKPH={weatherData?.current?.wind_kph}
-            cloud={weatherData?.current?.cloud}
-          />
-        <AirQuality
+        <OtherDetailsComponent
           isDay={isDay}
-          data={weatherData?.current?.air_quality}
+          humidity={weatherData?.current?.humidity}
+          windKPH={weatherData?.current?.wind_kph}
+          cloud={weatherData?.current?.cloud}
+        />
+        <AirQuality isDay={isDay} data={weatherData?.current?.air_quality} />
+      </div>
+      <div className="bottom-container">
+        <WindDetails
+          isDay={isDay}
+          data={{
+            windKPH: weatherData?.current?.wind_kph,
+            windDirection: weatherData?.current?.wind_dir,
+            atmosphericPressure: weatherData?.current?.pressure_mb,
+            windChill: weatherData?.current?.windchill_c,
+            heatIndex: weatherData?.current?.heatindex_c,
+            dewPoint: weatherData?.current?.dewpoint_c,
+            visibility: weatherData?.current?.vis_km,
+            uv: weatherData?.current?.uv,
+          }}
+        />
+        <ForecastCarousel
+          weatherForecastData={weatherForecastData}
+          isDay={isDay}
         />
       </div>
-      <ForecastCarousel
-        weatherForecastData={weatherForecastData}
-        isDay={isDay}
-      />
     </div>
   );
 };

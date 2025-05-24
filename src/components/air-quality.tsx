@@ -10,7 +10,7 @@ export const AirQuality=({isDay,data}: AirQualityPropsDTO)=>{
         isDay ? "air-quality-container-day" : "air-quality-container-night"
       } air-quality-container`}
     >
-      <div className="air-quality-heading">See Air Quality</div>
+      <div className="air-quality-heading">Air Quality</div>
       <div className="air-quality-data">
         <p>Carbon Monoxide: <span>{co}</span></p>
         <p>Nitrogen Dioxide:<span>{no2}</span></p>

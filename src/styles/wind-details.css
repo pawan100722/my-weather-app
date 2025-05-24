@@ -1,0 +1,26 @@
+.wind-details-container{
+  background-color: rgba(67, 162, 121, 0.3);
+  border-radius: 60px 0 60px 0;
+  padding:70px;
+}
+
+.wind-details-container-day{
+  color:rgb(118, 37, 193);
+}
+
+.wind-details-container-night{
+  color:white;
+}
+
+.wind-details-item{
+  font-size: 1rem;
+  font-weight: bold;
+  padding:5px;
+}
+
+.wind-details-item span{
+  font-weight: bolder;
+  font-size: 1.2rem;
+  color:rgb(190, 86, 51);
+  margin:10px;
+}
