@@ -1,49 +1,59 @@
 .air-quality-container{
-  position: relative;
-  padding: 10px;
-  border-radius: 20px;
-  height: 50px;
-  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 5px;
+  align-items: center;
   cursor: pointer;
   font-weight: bolder;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  position: relative;
+}
+
+.air-quality-heading{
+  background-color: rgb(103, 92, 92,0.7);
+  padding:10px;
+  border-radius: 20px;
+  /* position: absolute;
+  top:-50px;
+  z-index: 11; */
 }
 
 .air-quality-container-day{
-  background-color: rgb(103, 92, 92,0.4);
   color:black;
 }
 
 .air-quality-container-night{
-  background-color: rgb(103, 92, 92,0.4);
   color:white;
 }
 
 .air-quality-data{
   font-weight: bold;
   font-size: 1rem;
-  color:white;
-  position: absolute;
-  top:40px;
-  border-radius: 20px;
-  z-index: 999;
-  width: 340px;
-  padding:10px;
-  opacity:0;
-  background-color: rgb(103, 92, 92);
-  transition: opacity 1s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 350px;
+  height:350px;
+  opacity:0.1;
+  background-color: rgb(103, 92, 92,0.7);
+  transition: opacity 0.7s ease;
 }
 
+.air-quality-data:hover, .air-quality-heading:hover~.air-quality-data{
+  opacity: 1;
+}
+
+
 .air-quality-data>p{
-  padding:5px;
+  padding:2px;
 }
 
 .air-quality-data p span{
   font-size: 1.3rem;
-  color:aquamarine;
+  color:rgb(80, 80, 213);
   margin:10px;
 }
 
-.air-quality-container:hover> .air-quality-data{
-  opacity: 1;
-}

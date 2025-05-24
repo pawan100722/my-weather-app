@@ -36,6 +36,8 @@ export const WeatherComponent = () => {
     ]
   );
 
+  const [isDay, setIsDay] = useState<number>(0)
+
   
   /**
    * When the component mounts, the the current location is set
@@ -83,6 +85,7 @@ export const WeatherComponent = () => {
       setWeatherData(data);
       setWeatherForecastData(data?.forecast?.forecastday[0]?.hour);
       setIsDataLoaded(true);
+      setIsDay(data?.current?.is_day);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       const { name, status } = err;
@@ -99,35 +102,35 @@ export const WeatherComponent = () => {
   ) : (
     <div
       className={`weather-component-container ${
-        weatherData?.current?.is_day ? "day" : "night"
+        isDay ? "day" : "night"
       }`}
     >
       <TopSection
-        isDay={weatherData?.current?.is_day}
-        currentConditionText={weatherData?.current?.condition?.tex}
+        isDay={isDay}
+        currentConditionText={weatherData?.current?.condition?.text}
         currentFeelsLike={weatherData?.current?.feelslike_c}
         currentTemperature={weatherData?.current?.temp_c}
       />
       <div className="info-container">
         <WeatherMidSectionComponent
-          isDay={weatherData?.current?.is_day}
+          isDay={isDay}
           locationName={weatherData?.location?.name}
           regionName={weatherData?.location?.region}
         />
+          <OtherDetailsComponent
+            isDay={isDay}
+            humidity={weatherData?.current?.humidity}
+            windKPH={weatherData?.current?.wind_kph}
+            cloud={weatherData?.current?.cloud}
+          />
         <AirQuality
-          isDay={weatherData?.current?.is_day}
+          isDay={isDay}
           data={weatherData?.current?.air_quality}
-        />
-        <OtherDetailsComponent
-          isDay={weatherData?.current?.is_day}
-          humidity={weatherData?.current?.humidity}
-          windKPH={weatherData?.current?.wind_kph}
-          cloud={weatherData?.current?.cloud}
         />
       </div>
       <ForecastCarousel
         weatherForecastData={weatherForecastData}
-        isDay={weatherData?.current?.is_day}
+        isDay={isDay}
       />
     </div>
   );
