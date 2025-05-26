@@ -1,7 +1,7 @@
 .wind-details-container{
   background-color: rgba(67, 162, 121, 0.3);
   border-radius: 60px 0 60px 0;
-  padding:70px;
+  padding:20px;
 }
 
 .wind-details-container-day{
@@ -16,6 +16,7 @@
   font-size: 1rem;
   font-weight: bold;
   padding:5px;
+  width:100%;
 }
 
 .wind-details-item span{
